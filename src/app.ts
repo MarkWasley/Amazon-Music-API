@@ -3,7 +3,6 @@ import { Scalar } from '@scalar/hono-api-reference'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
 import { prettyJSON } from 'hono/pretty-json'
-import { Home } from './pages/home.js'
 import type { Routes } from './types/index.js'
 import type { HTTPException } from 'hono/http-exception'
 import errorMiddleware from './common/middlewares/error.middleware.js'
@@ -29,7 +28,10 @@ export class App {
             this.app.route('/api', route.controller)
         })
 
-        this.app.route('/', Home)
+        // Root route redirect to Swagger /docs UI
+        this.app.get('/', (c) => {
+            return c.redirect('/docs', 302)
+        })
     }
 
     private initGlobalMiddlewares() {
@@ -52,7 +54,7 @@ export class App {
                     version: '1.0.0',
                     title: 'Unofficial Amazon Music API',
                     description: `# Introduction
-                    \nUnofficial Amazon Music API, accessible at http://localhost:3000, is an unofficial API that provides programmatic access to music metadata (songs, albums, artists, playlists, community playlists) sourced from Amazon Music. it offers a simple adapter layer to expose Amazon Music data with the existing API contracts. \n`
+                    \nUnofficial Amazon Music API, accessible at [https://amzn-music-api.vercel.app/](https://amzn-music-api.vercel.app/), is an unofficial API that provides programmatic access to music metadata (songs, albums, artists, playlists, community playlists) sourced from Amazon Music. it offers a simple adapter layer to expose Amazon Music data with the existing API contracts. \n`
                 },
                 servers: [
                     { url: `${protocol}//${hostname}${port ? `:${port}` : ''}`, description: 'Current environment' }
