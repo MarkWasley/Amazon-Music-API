@@ -28,11 +28,25 @@ This is due to the need to make additional API calls to retrieve track duration 
 
 ## Installation
 
-### Prerequisites
+### Quick Deploy (One-Click)
+
+Deploy to Vercel with a single click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnotdeltaxd%2FAmazon-Music-API&project-name=amazon-music-api&repository-name=amazon-music-api)
+
+This will automatically:
+- Clone the repository
+- Setup environment variables
+- Deploy on Vercel
+- Provide you with a live API endpoint
+
+### Local Setup
+
+#### Prerequisites
 - Node.js 18+ or [Bun](https://bun.sh)
 - npm or bun package manager
 
-### Setup
+#### Installation
 
 ```bash
 # Clone the repository
