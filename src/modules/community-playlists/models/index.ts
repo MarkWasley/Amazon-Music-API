@@ -1,0 +1,1 @@
+export * from './community-pl.model.js'
