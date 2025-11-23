@@ -9,6 +9,7 @@ This is an **unofficial** and **educational** project. It is not affiliated with
 ## ⏱️ Important Notes on Response Times
 
 **The following endpoints may take more than 5 seconds to respond:**
+
 - `/api/search` - Global search across all entity types
 - `/api/search/artists` - Artist search
 - `/api/search/songs` - Songs search
@@ -35,6 +36,7 @@ Deploy to Vercel with a single click:
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnotdeltaxd%2FAmazon-Music-API&project-name=amazon-music-api&repository-name=amazon-music-api)
 
 This will automatically:
+
 - Clone the repository
 - Setup environment variables
 - Deploy on Vercel
@@ -43,6 +45,7 @@ This will automatically:
 ### Local Setup
 
 #### Prerequisites
+
 - Node.js 18+ or [Bun](https://bun.sh)
 - npm or bun package manager
 
@@ -93,6 +96,7 @@ All endpoints return JSON responses with a `success` boolean and `data` field co
 ### Search Endpoints
 
 #### Global Search
+
 Search across all entity types (songs, albums, artists, playlists, community playlists).
 
 ```bash
@@ -100,12 +104,14 @@ curl 'http://localhost:3000/api/search?query=Imagine%20Dragons'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/search`
 - **Query Parameters:**
-  - `query` (string, required) - Search query (minimum 2 characters)
+    - `query` (string, required) - Search query (minimum 2 characters)
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -120,155 +126,170 @@ curl 'http://localhost:3000/api/search?query=Imagine%20Dragons'
 ```
 
 #### Search Songs
+
 ```bash
 curl 'http://localhost:3000/api/search/songs?query=Believer&page=1'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/search/songs`
 - **Query Parameters:**
-  - `query` (string, required) - Search query (minimum 2 characters)
-  - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
+    - `query` (string, required) - Search query (minimum 2 characters)
+    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "title": "string",
-      "url": null,
-      "image": null,
-      "duration": 1,
-      "album": {
-        "id": "string",
-        "name": "string",
-        "url": null
-      },
-      "artist": {
-        "id": "string",
-        "name": "string",
-        "url": null
-      }
-    }
-  ]
+    "success": true,
+    "data": [
+        {
+            "id": "string",
+            "title": "string",
+            "url": null,
+            "image": null,
+            "duration": 1,
+            "album": {
+                "id": "string",
+                "name": "string",
+                "url": null
+            },
+            "artist": {
+                "id": "string",
+                "name": "string",
+                "url": null
+            }
+        }
+    ]
 }
 ```
 
 #### Search Albums
+
 ```bash
 curl 'http://localhost:3000/api/search/albums?query=Evolve&page=1'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/search/albums`
 - **Query Parameters:**
-  - `query` (string, required) - Search query (minimum 2 characters)
-  - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
+    - `query` (string, required) - Search query (minimum 2 characters)
+    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "name": "string",
-      "url": null,
-      "image": null,
-      "artist": {
-        "id": "string",
-        "name": "string",
-        "url": null
-      }
-    }
-  ]
+    "success": true,
+    "data": [
+        {
+            "id": "string",
+            "name": "string",
+            "url": null,
+            "image": null,
+            "artist": {
+                "id": "string",
+                "name": "string",
+                "url": null
+            }
+        }
+    ]
 }
 ```
 
 #### Search Artists
+
 ```bash
 curl 'http://localhost:3000/api/search/artists?query=Adele&page=1'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/search/artists`
 - **Query Parameters:**
-  - `query` (string, required) - Search query (minimum 2 characters)
-  - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
+    - `query` (string, required) - Search query (minimum 2 characters)
+    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "name": "string",
-      "url": null,
-      "image": null
-    }
-  ]
+    "success": true,
+    "data": [
+        {
+            "id": "string",
+            "name": "string",
+            "url": null,
+            "image": null
+        }
+    ]
 }
 ```
 
 #### Search Playlists
+
 ```bash
 curl 'http://localhost:3000/api/search/playlists?query=Indie&page=1'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/search/playlists`
 - **Query Parameters:**
-  - `query` (string, required) - Search query (minimum 2 characters)
-  - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
+    - `query` (string, required) - Search query (minimum 2 characters)
+    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "name": "string",
-      "url": null,
-      "image": null,
-      "createdBy": "string"
-    }
-  ]
+    "success": true,
+    "data": [
+        {
+            "id": "string",
+            "name": "string",
+            "url": null,
+            "image": null,
+            "createdBy": "string"
+        }
+    ]
 }
 ```
 
 #### Search Community Playlists
+
 ```bash
 curl 'http://localhost:3000/api/search/community-playlists?query=Indie&page=1'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/search/community-playlists`
 - **Query Parameters:**
-  - `query` (string, required) - Search query (minimum 2 characters)
-  - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
+    - `query` (string, required) - Search query (minimum 2 characters)
+    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "name": "string",
-      "url": null,
-      "image": null,
-      "createdBy": "string"
-    }
-  ]
+    "success": true,
+    "data": [
+        {
+            "id": "string",
+            "name": "string",
+            "url": null,
+            "image": null,
+            "createdBy": "string"
+        }
+    ]
 }
 ```
 
@@ -277,72 +298,78 @@ curl 'http://localhost:3000/api/search/community-playlists?query=Indie&page=1'
 ### Songs Endpoints
 
 #### Get Song by URL
+
 ```bash
 curl 'http://localhost:3000/api/songs?url=https%3A%2F%2Fmusic.amazon.com%2Ftracks%2FB079VDQRPX'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/songs`
 - **Query Parameters:**
-  - `url` (string, required) - Amazon Music track URL (e.g., `https://music.amazon.com/tracks/B079VDQRPX`)
+    - `url` (string, required) - Amazon Music track URL (e.g., `https://music.amazon.com/tracks/B079VDQRPX`)
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "string",
-    "title": "string",
-    "url": "https://example.com",
-    "image": null,
-    "duration": 1,
-    "album": {
-      "id": "string",
-      "name": "string",
-      "url": null
-    },
-    "artist": {
-      "id": "string",
-      "name": "string",
-      "url": null
+    "success": true,
+    "data": {
+        "id": "string",
+        "title": "string",
+        "url": "https://example.com",
+        "image": null,
+        "duration": 1,
+        "album": {
+            "id": "string",
+            "name": "string",
+            "url": null
+        },
+        "artist": {
+            "id": "string",
+            "name": "string",
+            "url": null
+        }
     }
-  }
 }
 ```
 
 #### Get Song by ID
+
 ```bash
 curl 'http://localhost:3000/api/songs/B079VDQRPX'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/songs/{id}`
 - **Path Parameters:**
-  - `id` (string, required) - Amazon Music track ID (e.g., `B079VDQRPX`)
+    - `id` (string, required) - Amazon Music track ID (e.g., `B079VDQRPX`)
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "string",
-    "title": "string",
-    "url": "https://example.com",
-    "image": null,
-    "duration": 1,
-    "album": {
-      "id": "string",
-      "name": "string",
-      "url": null
-    },
-    "artist": {
-      "id": "string",
-      "name": "string",
-      "url": null
+    "success": true,
+    "data": {
+        "id": "string",
+        "title": "string",
+        "url": "https://example.com",
+        "image": null,
+        "duration": 1,
+        "album": {
+            "id": "string",
+            "name": "string",
+            "url": null
+        },
+        "artist": {
+            "id": "string",
+            "name": "string",
+            "url": null
+        }
     }
-  }
 }
 ```
 
@@ -351,66 +378,71 @@ curl 'http://localhost:3000/api/songs/B079VDQRPX'
 ### Albums Endpoints
 
 #### Get Album by URL
+
 ```bash
 curl 'http://localhost:3000/api/albums?url=https%3A%2F%2Fmusic.amazon.com%2Falbums%2FB079VSDTZP'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/albums`
 - **Query Parameters:**
-  - `url` (string, required) - Amazon Music album URL (e.g., `https://music.amazon.com/albums/B079VSDTZP`)
+    - `url` (string, required) - Amazon Music album URL (e.g., `https://music.amazon.com/albums/B079VSDTZP`)
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "string",
-    "name": "string",
-    "url": "https://example.com",
-    "image": null,
-    "totalSongs": null,
-    "totalDuration": null,
-    "releaseDate": null,
-    "artist": {
-      "id": "string",
-      "name": "string",
-      "url": null
-    },
-    "songs": [
-      {
+    "success": true,
+    "data": {
         "id": "string",
-        "title": "string",
+        "name": "string",
         "url": "https://example.com",
         "image": null,
-        "duration": 1,
-        "album": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        },
+        "totalSongs": null,
+        "totalDuration": null,
+        "releaseDate": null,
         "artist": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        }
-      }
-    ]
-  }
+            "id": "string",
+            "name": "string",
+            "url": null
+        },
+        "songs": [
+            {
+                "id": "string",
+                "title": "string",
+                "url": "https://example.com",
+                "image": null,
+                "duration": 1,
+                "album": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                },
+                "artist": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                }
+            }
+        ]
+    }
 }
 ```
 
 #### Get Album by ID
+
 ```bash
 curl 'http://localhost:3000/api/albums/B079VSDTZP'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/albums/{id}`
 - **Path Parameters:**
-  - `id` (string, required) - Amazon Music album ID (e.g., `B079VSDTZP`)
+    - `id` (string, required) - Amazon Music album ID (e.g., `B079VSDTZP`)
 
 **Response:** Same as Get Album by URL
 
@@ -419,58 +451,63 @@ curl 'http://localhost:3000/api/albums/B079VSDTZP'
 ### Artists Endpoints
 
 #### Get Artist by URL
+
 ```bash
 curl 'http://localhost:3000/api/artists?url=https%3A%2F%2Fmusic.amazon.com%2Fartists%2FB003AM1Q94%2Fimagine-dragons'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/artists`
 - **Query Parameters:**
-  - `url` (string, required) - Amazon Music artist URL (e.g., `https://music.amazon.com/artists/B003AM1Q94/imagine-dragons`)
+    - `url` (string, required) - Amazon Music artist URL (e.g., `https://music.amazon.com/artists/B003AM1Q94/imagine-dragons`)
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "string",
-    "name": "string",
-    "url": "https://example.com",
-    "image": null,
-    "topSongs": [
-      {
+    "success": true,
+    "data": {
         "id": "string",
-        "title": "string",
+        "name": "string",
         "url": "https://example.com",
         "image": null,
-        "duration": 1,
-        "album": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        },
-        "artist": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        }
-      }
-    ]
-  }
+        "topSongs": [
+            {
+                "id": "string",
+                "title": "string",
+                "url": "https://example.com",
+                "image": null,
+                "duration": 1,
+                "album": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                },
+                "artist": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                }
+            }
+        ]
+    }
 }
 ```
 
 #### Get Artist by ID
+
 ```bash
 curl 'http://localhost:3000/api/artists/B003AM1Q94'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/artists/{id}`
 - **Path Parameters:**
-  - `id` (string, required) - Amazon Music artist ID (e.g., `B003AM1Q94`)
+    - `id` (string, required) - Amazon Music artist ID (e.g., `B003AM1Q94`)
 
 **Response:** Same as Get Artist by URL
 
@@ -479,61 +516,66 @@ curl 'http://localhost:3000/api/artists/B003AM1Q94'
 ### Playlists Endpoints
 
 #### Get Playlist by URL
+
 ```bash
 curl 'http://localhost:3000/api/playlists?url=https%3A%2F%2Fmusic.amazon.com%2Fplaylists%2FB07QHGBGC9'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/playlists`
 - **Query Parameters:**
-  - `url` (string, required) - Amazon Music playlist URL (e.g., `https://music.amazon.com/playlists/B07QHGBGC9`)
+    - `url` (string, required) - Amazon Music playlist URL (e.g., `https://music.amazon.com/playlists/B07QHGBGC9`)
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "string",
-    "name": "string",
-    "url": "https://example.com",
-    "image": null,
-    "totalSongs": null,
-    "totalDuration": null,
-    "createdBy": "string",
-    "songs": [
-      {
+    "success": true,
+    "data": {
         "id": "string",
-        "title": "string",
+        "name": "string",
         "url": "https://example.com",
         "image": null,
-        "duration": 1,
-        "album": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        },
-        "artist": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        }
-      }
-    ]
-  }
+        "totalSongs": null,
+        "totalDuration": null,
+        "createdBy": "string",
+        "songs": [
+            {
+                "id": "string",
+                "title": "string",
+                "url": "https://example.com",
+                "image": null,
+                "duration": 1,
+                "album": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                },
+                "artist": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                }
+            }
+        ]
+    }
 }
 ```
 
 #### Get Playlist by ID
+
 ```bash
 curl 'http://localhost:3000/api/playlists/B07QHGBGC9'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/playlists/{id}`
 - **Path Parameters:**
-  - `id` (string, required) - Amazon Music playlist ID (e.g., `B07QHGBGC9`)
+    - `id` (string, required) - Amazon Music playlist ID (e.g., `B07QHGBGC9`)
 
 **Response:** Same as Get Playlist by URL
 
@@ -542,61 +584,66 @@ curl 'http://localhost:3000/api/playlists/B07QHGBGC9'
 ### Community Playlists Endpoints
 
 #### Get Community Playlist by URL
+
 ```bash
 curl 'http://localhost:3000/api/community-playlists?url=https%3A%2F%2Fmusic.amazon.com%2Fuser-playlists%2Fa75b6df7a362487db81f31bca79eb28esune'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/community-playlists`
 - **Query Parameters:**
-  - `url` (string, required) - Amazon Music community playlist URL (e.g., `https://music.amazon.com/user-playlists/a75b6df7a362487db81f31bca79eb28esune`)
+    - `url` (string, required) - Amazon Music community playlist URL (e.g., `https://music.amazon.com/user-playlists/a75b6df7a362487db81f31bca79eb28esune`)
 
 **Response:**
+
 ```json
 {
-  "success": true,
-  "data": {
-    "id": "string",
-    "name": "string",
-    "url": "https://example.com",
-    "image": null,
-    "totalSongs": null,
-    "totalDuration": null,
-    "createdBy": "string",
-    "songs": [
-      {
+    "success": true,
+    "data": {
         "id": "string",
-        "title": "string",
+        "name": "string",
         "url": "https://example.com",
         "image": null,
-        "duration": 1,
-        "album": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        },
-        "artist": {
-          "id": "string",
-          "name": "string",
-          "url": null
-        }
-      }
-    ]
-  }
+        "totalSongs": null,
+        "totalDuration": null,
+        "createdBy": "string",
+        "songs": [
+            {
+                "id": "string",
+                "title": "string",
+                "url": "https://example.com",
+                "image": null,
+                "duration": 1,
+                "album": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                },
+                "artist": {
+                    "id": "string",
+                    "name": "string",
+                    "url": null
+                }
+            }
+        ]
+    }
 }
 ```
 
 #### Get Community Playlist by ID
+
 ```bash
 curl 'http://localhost:3000/api/community-playlists/a75b6df7a362487db81f31bca79eb28esune'
 ```
 
 **Request:**
+
 - **Method:** `GET`
 - **Path:** `/community-playlists/{id}`
 - **Path Parameters:**
-  - `id` (string, required) - Amazon Music community playlist ID (e.g., `a75b6df7a362487db81f31bca79eb28esune`)
+    - `id` (string, required) - Amazon Music community playlist ID (e.g., `a75b6df7a362487db81f31bca79eb28esune`)
 
 **Response:** Same as Get Community Playlist by URL
 
@@ -607,40 +654,45 @@ curl 'http://localhost:3000/api/community-playlists/a75b6df7a362487db81f31bca79e
 All endpoints return standardized error responses:
 
 **400 - Bad Request** (Validation Error)
+
 ```json
 {
-  "success": false,
-  "message": "Validation failed"
+    "success": false,
+    "message": "Validation failed"
 }
 ```
 
 **404 - Not Found**
+
 ```json
 {
-  "success": false,
-  "message": "Not found"
+    "success": false,
+    "message": "Not found"
 }
 ```
 
 **429 - Rate Limited**
+
 ```json
 {
-  "success": false,
-  "message": "Rate limit exceeded, please try again later"
+    "success": false,
+    "message": "Rate limit exceeded, please try again later"
 }
 ```
 
 **500 - Internal Server Error**
+
 ```json
 {
-  "success": false,
-  "message": "Internal server error"
+    "success": false,
+    "message": "Internal server error"
 }
 ```
 
 ## Interactive API Documentation
 
 Once the server is running, access the interactive Swagger UI at:
+
 ```
 http://localhost:3000
 ```

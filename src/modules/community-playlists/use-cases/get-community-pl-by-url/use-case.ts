@@ -32,7 +32,7 @@ export class GetCommunityPlaylistByUrlUseCase implements IUseCase<string, Detail
                 throw createError('No data in album details response', 404, 'NoDataFound')
             }
 
-            return createCommunityPlaylistPayload(resp, data.id);
+            return createCommunityPlaylistPayload(resp, data.id)
         } catch (error) {
             throw error
         }

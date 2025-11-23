@@ -35,7 +35,7 @@ export function buildAmazonHeaders(config: any, pageUrl = '') {
         'x-amzn-currency-of-preference': 'USD',
         'x-amzn-os-version': '1.0',
         'x-amzn-application-version': config.version || '',
-        'x-amzn-device-time-zone': '',
+        'x-amzn-device-time-zone': 'Asia/Calcutta',
         'x-amzn-timestamp': String(Date.now()),
         'x-amzn-csrf': JSON.stringify({
             interface: 'CSRFInterface.v1_0.CSRFHeaderElement',

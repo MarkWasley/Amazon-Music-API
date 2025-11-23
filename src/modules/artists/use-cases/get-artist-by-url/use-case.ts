@@ -1,9 +1,9 @@
-import { ENDPOINTS } from '../../../../common/constants/endpoints.js';
-import { useFetch } from '../../../../common/helpers/fetch.js';
+import { ENDPOINTS } from '../../../../common/constants/endpoints.js'
+import { useFetch } from '../../../../common/helpers/fetch.js'
 import { IUseCase } from '../../../../types/index.js'
-import { createError } from '../../../../utils/createError.js';
+import { createError } from '../../../../utils/createError.js'
 import { extractUrl } from '../../../../utils/urlExtractor.js'
-import { createArtistPayload } from '../../helpers/artist.helper.js';
+import { createArtistPayload } from '../../helpers/artist.helper.js'
 import { DetailsArtist } from '../../models/artist.model.js'
 
 export class GetArtistByUrlUseCase implements IUseCase<string, DetailsArtist> {
@@ -11,7 +11,7 @@ export class GetArtistByUrlUseCase implements IUseCase<string, DetailsArtist> {
 
     async execute(url: string) {
         try {
-            const data = extractUrl(url);
+            const data = extractUrl(url)
 
             if (data === null || !data.id) {
                 throw createError('Invalid artist URL', 400, 'BadRequest')
