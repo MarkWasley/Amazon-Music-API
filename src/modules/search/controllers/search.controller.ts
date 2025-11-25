@@ -7,8 +7,6 @@ import { SearchAlbumModel } from '../models/search-album.model.js'
 import { SearchPlaylistModel } from '../models/search-playlist.model.js'
 import { SearchArtistModel } from '../models/search-artist.model.js'
 import { SearchCommunityPlModel } from '../models/search-community-pl.model.js'
-import { ZodError } from 'zod'
-import { CustomHTTPException } from '../../../utils/createError.js'
 
 export class SearchController implements Routes {
     public controller: OpenAPIHono
