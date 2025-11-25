@@ -188,7 +188,7 @@ export const createSearchAllPayload = async (config: any, resp: any): Promise<Se
 
                 const result = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
                     headers: DEFAULT_HEADERS,
-                    timeout: 3000
+                    timeout: 2000
                 })
 
                 return result.data
@@ -201,8 +201,8 @@ export const createSearchAllPayload = async (config: any, resp: any): Promise<Se
         // ------------------------------
         // 4) Batch fetch albums
         // ------------------------------
-        const BATCH_SIZE = 3
-        const DELAY = 200
+        const BATCH_SIZE = 5
+        const DELAY = 100
 
         for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
             const batch = albumIds.slice(i, i + BATCH_SIZE)

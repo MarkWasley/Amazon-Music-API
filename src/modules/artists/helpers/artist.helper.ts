@@ -308,7 +308,7 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
 
             const songAlbumData = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
                 headers: DEFAULT_HEADERS,
-                timeout: 3000
+                timeout: 2000
             })
 
             return songAlbumData.data
@@ -319,10 +319,10 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
     }
 
     // ---------------------------
-    // Batch Fetch (size=3, delay=200ms)
+    // Batch Fetch (size=5, delay=100ms)
     // ---------------------------
-    const BATCH_SIZE = 3
-    const DELAY_BETWEEN_BATCHES = 200
+    const BATCH_SIZE = 5
+    const DELAY_BETWEEN_BATCHES = 100
 
     for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
         const batch = albumIds.slice(i, i + BATCH_SIZE)

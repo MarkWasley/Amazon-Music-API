@@ -73,7 +73,7 @@ export const createSearchSongsPayload = async (config: any, resp: any): Promise<
 
             const songAlbumData = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
                 headers: DEFAULT_HEADERS,
-                timeout: 3000
+                timeout: 2000
             })
 
             return songAlbumData.data
@@ -97,9 +97,9 @@ export const createSearchSongsPayload = async (config: any, resp: any): Promise<
 
     const albumIds = Array.from(uniqueAlbums)
 
-    // Fetch albums in batches of 3 with 200ms delay between batches
-    const BATCH_SIZE = 3
-    const DELAY_BETWEEN_BATCHES = 200
+    // Fetch albums in batches of 5 with 100ms delay between batches
+    const BATCH_SIZE = 5
+    const DELAY_BETWEEN_BATCHES = 100
 
     for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
         const batch = albumIds.slice(i, i + BATCH_SIZE)
@@ -247,7 +247,7 @@ export const createSearchSongsPagePayload = async (config: any, resp: any): Prom
 
             const res = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
                 headers: DEFAULT_HEADERS,
-                timeout: 3000
+                timeout: 2000
             })
 
             return res.data
@@ -258,10 +258,10 @@ export const createSearchSongsPagePayload = async (config: any, resp: any): Prom
     }
 
     // -----------------------------------------
-    // 3) BATCH FETCH ALBUMS (3 AT A TIME)
+    // 3) BATCH FETCH ALBUMS (5 AT A TIME)
     // -----------------------------------------
-    const BATCH_SIZE = 3
-    const DELAY = 200
+    const BATCH_SIZE = 5
+    const DELAY = 100
 
     for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
         const batch = albumIds.slice(i, i + BATCH_SIZE)
