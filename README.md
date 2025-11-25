@@ -128,7 +128,7 @@ curl 'http://localhost:3000/api/search?query=Imagine%20Dragons'
 #### Search Songs
 
 ```bash
-curl 'http://localhost:3000/api/search/songs?query=Believer&page=1'
+curl 'http://localhost:3000/api/search/songs?query=Believer&page=1&limit=5'
 ```
 
 **Request:**
@@ -137,7 +137,8 @@ curl 'http://localhost:3000/api/search/songs?query=Believer&page=1'
 - **Path:** `/search/songs`
 - **Query Parameters:**
     - `query` (string, required) - Search query (minimum 2 characters)
-    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains 10 results.
+    - `page` (number, optional) - Page number (default: 1, max: 25). Each page contains up to 10 results.
+    - `limit` (number, optional) - Maximum number of songs to return (default: 10, max: 10). Only fetches album data for the limited number of tracks, optimizing response time.
 
 **Response:**
 

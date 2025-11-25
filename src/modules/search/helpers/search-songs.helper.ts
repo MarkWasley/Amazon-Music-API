@@ -48,14 +48,19 @@ interface PaginationWidgetItem {
     }
 }
 
-export const createSearchSongsPayload = async (config: any, resp: any): Promise<SearchSong[]> => {
+export const createSearchSongsPayload = async (config: any, resp: any, limit?: number): Promise<SearchSong[]> => {
     const songs: SearchSong[] = []
 
     if (!resp?.methods?.[0]?.template?.widgets?.[0]?.items) {
         throw createError('Invalid response structure for songs search', 500, 'InvalidResponseError')
     }
 
-    const songItems: WidgetItem[] = resp.methods[0].template.widgets[0].items
+    let songItems: WidgetItem[] = resp.methods[0].template.widgets[0].items
+
+    // Apply limit early to only process requested number of songs
+    if (limit && limit > 0) {
+        songItems = songItems.slice(0, limit)
+    }
 
     // Request-level cache
     const albumDataCache = new Map()
@@ -83,7 +88,7 @@ export const createSearchSongsPayload = async (config: any, resp: any): Promise<
         }
     }
 
-    // Collect unique album IDs
+    // Collect unique album IDs (only from limited songs)
     const uniqueAlbums = new Set()
     songItems.forEach((item) => {
         const storageKey = item.iconButton?.observer?.storageKey
@@ -197,14 +202,19 @@ export const createSearchSongsPayload = async (config: any, resp: any): Promise<
     return songs
 }
 
-export const createSearchSongsPagePayload = async (config: any, resp: any): Promise<SearchSong[]> => {
+export const createSearchSongsPagePayload = async (config: any, resp: any, limit?: number): Promise<SearchSong[]> => {
     const songs: SearchSong[] = []
 
     if (!resp?.methods?.[0]?.items) {
         throw createError('Invalid response structure for songs pagination', 500, 'InvalidResponseError')
     }
 
-    const songItems: PaginationWidgetItem[] = resp.methods[0].items
+    let songItems: PaginationWidgetItem[] = resp.methods[0].items
+
+    // Apply limit early to only process requested number of songs
+    if (limit && limit > 0) {
+        songItems = songItems.slice(0, limit)
+    }
 
     // ⬇ Extract next pagination token (same as before but untouched)
     let nextTokenForPagination = null
@@ -217,7 +227,7 @@ export const createSearchSongsPagePayload = async (config: any, resp: any): Prom
     }
 
     // -----------------------------------------
-    // 1) CACHE + UNIQUE ALBUM IDS EXTRACTION
+    // 1) CACHE + UNIQUE ALBUM IDS EXTRACTION (from limited songs)
     // -----------------------------------------
     const albumDataCache = new Map()
     const uniqueAlbums = new Set()
@@ -359,5 +369,6 @@ export const createSearchSongsPagePayload = async (config: any, resp: any): Prom
     }
 
     songs.push(...validItems)
+
     return songs
 }

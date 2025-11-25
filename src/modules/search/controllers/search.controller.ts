@@ -196,12 +196,26 @@ export class SearchController implements Routes {
                             .optional()
                             .openapi({
                                 title: 'Page',
-                                description: 'Page number for paginated results. Each page contains 10 songs.',
+                                description: 'Page number for paginated results. Each page contains up to 10 songs.',
                                 type: 'number',
                                 example: 1,
                                 default: 1,
                                 minimum: 1,
                                 maximum: 25
+                            }),
+                        limit: z.coerce
+                            .number()
+                            .min(1, { message: 'Limit must be at least 1' })
+                            .max(10, { message: 'Limit cannot exceed 10' })
+                            .optional()
+                            .openapi({
+                                title: 'Limit',
+                                description: 'Maximum number of songs to return per page (default: 10, max: 10)',
+                                type: 'number',
+                                example: 10,
+                                default: 10,
+                                minimum: 1,
+                                maximum: 10
                             })
                     })
                 },
@@ -306,9 +320,9 @@ export class SearchController implements Routes {
                 }
             }),
             async (ctx) => {
-                const { query, page } = ctx.req.valid('query')
+                const { query, page, limit } = ctx.req.valid('query')
 
-                const result = await this.searchService.searchSongs({ query, page })
+                const result = await this.searchService.searchSongs({ query, page, limit })
 
                 return ctx.json({
                     success: true,

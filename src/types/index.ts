@@ -14,6 +14,7 @@ export interface Routes {
 export interface SearchArgs {
   query: string
   page?: number
+  limit?: number
 }
 
 export interface Obj {

@@ -9,7 +9,7 @@ import { SearchSong } from '../../models/search-song.model.js'
 export class SearchSongsUseCase implements IUseCase<SearchArgs, SearchSong[]> {
     constructor() {}
 
-    async execute({ query, page = 1 }: SearchArgs): Promise<SearchSong[]> {
+    async execute({ query, page = 1, limit }: SearchArgs): Promise<SearchSong[]> {
         try {
             let nextToken = null
 
@@ -36,9 +36,9 @@ export class SearchSongsUseCase implements IUseCase<SearchArgs, SearchSong[]> {
             let res: SearchSong[];
 
             if (page >= 2 && page <= 25) {
-                res = await createSearchSongsPagePayload(config, resp);
+                res = await createSearchSongsPagePayload(config, resp, limit);
             } else {
-                res = await createSearchSongsPayload(config, resp);
+                res = await createSearchSongsPayload(config, resp, limit);
             }
 
             return res;
