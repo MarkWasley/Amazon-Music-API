@@ -54,7 +54,7 @@ export class App {
                     version: '1.0.0',
                     title: 'Unofficial Amazon Music API',
                     description: `# Introduction
-                    \nUnofficial Amazon Music API, accessible at [https://amzn-music-api.vercel.app/](https://amzn-music-api.vercel.app/), is an unofficial API that provides programmatic access to music metadata (songs, albums, artists, playlists, community playlists) sourced from Amazon Music. it offers a simple adapter layer to expose Amazon Music data with the existing API contracts. \n`
+                    \nUnofficial Amazon Music API, is an unofficial API that provides programmatic access to music metadata (songs, albums, artists, playlists, community playlists) sourced from Amazon Music. it offers a simple adapter layer to expose Amazon Music data with the existing API contracts. \n`
                 },
                 servers: [
                     { url: `${protocol}//${hostname}${port ? `:${port}` : ''}`, description: 'Current environment' }
