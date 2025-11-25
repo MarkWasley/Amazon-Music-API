@@ -48,10 +48,10 @@ export class SongController implements Routes {
                             .openapi({
                                 title: 'Amazon Music Track URL',
                                 description:
-                                    'A direct URL to the track on Amazon Music, e.g., https://music.amazon.com/tracks/B079TNV7WL',
+                                    'A direct URL to the track on Amazon Music, e.g., https://music.amazon.com/tracks/B079VDQRPX',
                                 type: 'string',
-                                example: 'https://music.amazon.com/tracks/B079TNV7WL',
-                                default: 'https://music.amazon.com/tracks/B079TNV7WL',
+                                example: 'https://music.amazon.com/tracks/B079VDQRPX',
+                                default: 'https://music.amazon.com/tracks/B079VDQRPX',
                                 pattern: '^https://music\\.amazon\\.[a-z.]+/tracks/[A-Za-z0-9]+(/)?(\\?.*)?$'
                             })
                     })
@@ -182,10 +182,10 @@ export class SongController implements Routes {
                                 in: 'path'
                             },
                             title: 'Amazon Music Track ID',
-                            description: 'The unique ID of the track on Amazon Music, e.g., B079TNV7WL',
+                            description: 'The unique ID of the track on Amazon Music, e.g., B079VDQRPX',
                             type: 'string',
-                            example: 'B079TNV7WL',
-                            default: 'B079TNV7WL'
+                            example: 'B079VDQRPX',
+                            default: 'B079VDQRPX'
                         })
                     })
                 },
