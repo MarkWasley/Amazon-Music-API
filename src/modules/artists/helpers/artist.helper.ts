@@ -50,233 +50,6 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
 
     const topSongsWidget = widgets.find((widget: any) => widget.header?.toLowerCase().includes('top songs'))
 
-    // const topSongs: DetailsSong[] = topSongsWidget
-    //     ? await Promise.all(
-    //           topSongsWidget.items.map(async (item: any) => {
-    //               const [albumId, trackId] = item.iconButton.observer.storageKey.split(':')
-
-    //               let duration = 0
-
-    //               try {
-    //                   const httpHeaders = buildAmazonHeaders(
-    //                       config,
-    //                       `https://music.amazon.com/albums/${encodeURIComponent(albumId)}`
-    //                   )
-
-    //                   const body = {
-    //                       id: albumId,
-    //                       userHash: JSON.stringify({ level: 'LIBRARY_MEMBER' }),
-    //                       headers: JSON.stringify(httpHeaders)
-    //                   }
-
-    //                   const songAlbumData = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
-    //                       headers: DEFAULT_HEADERS,
-    //                       timeout: 5000
-    //                   })
-
-    //                   // Find the specific track in album to get duration
-    //                   if (
-    //                       songAlbumData.data.methods[0].template.widgets &&
-    //                       songAlbumData.data.methods[0].template.widgets[0]
-    //                   ) {
-    //                       const albumTracks = songAlbumData.data.methods[0].template.widgets[0].items
-    //                       const albumTrack = albumTracks.find((track: any) => {
-    //                           const trackDeeplink = track.primaryTextLink?.deeplink
-    //                           if (trackDeeplink) {
-    //                               const trackIdFromDeeplink = trackDeeplink.split('/tracks/')[1]?.split('/')[0]
-    //                               return trackIdFromDeeplink === trackId
-    //                           }
-    //                           return false
-    //                       })
-
-    //                       if (albumTrack) {
-    //                           const durationString = albumTrack.secondaryText3 || ''
-    //                           duration = durationToSeconds(durationString)
-    //                       }
-    //                   }
-    //               } catch (error) {
-    //                   console.log(`Could not fetch album details for song ${trackId}`)
-    //               }
-
-    //               return {
-    //                   id: trackId,
-    //                   title: cleanSongTitle(item.primaryText?.text) || null,
-    //                   url: `https://music.amazon.com/tracks/${encodeURIComponent(trackId)}`,
-    //                   image: cleanImageUrl(item.image || null),
-    //                   duration: duration,
-    //                   album: {
-    //                       id: albumId,
-    //                       name: item.contextMenu.options[0]?.onItemSelected[1]?.template.headerText.text || null,
-    //                       url: `https://music.amazon.com/albums/${encodeURIComponent(albumId)}`
-    //                   },
-    //                   artist: {
-    //                       id: artistId,
-    //                       name: item.secondaryText || null,
-    //                       url:
-    //                           item.contextMenu.options[1]?.onItemSelected[2]?.template.templateData.seoHead.link[0]
-    //                               ?.href || null
-    //                   }
-    //               }
-    //           })
-    //       )
-    //     : []
-
-    // const albumCache = new Map<string, any>()
-
-    // const topSongs: DetailsSong[] = topSongsWidget
-    //     ? await Promise.all(
-    //           topSongsWidget.items.map(async (item: any) => {
-    //               const [albumId, trackId] = item.iconButton.observer.storageKey.split(':')
-
-    //               let duration = 0
-
-    //               try {
-    //                   // 👉 If album already fetched before, reuse it
-    //                   let albumData = albumCache.get(albumId)
-
-    //                   if (!albumData) {
-    //                       const httpHeaders = buildAmazonHeaders(
-    //                           config,
-    //                           `https://music.amazon.com/albums/${encodeURIComponent(albumId)}`
-    //                       )
-
-    //                       const body = {
-    //                           id: albumId,
-    //                           userHash: JSON.stringify({ level: 'LIBRARY_MEMBER' }),
-    //                           headers: JSON.stringify(httpHeaders)
-    //                       }
-
-    //                       const response = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
-    //                           headers: DEFAULT_HEADERS,
-    //                           timeout: 5000
-    //                       })
-
-    //                       albumData = response.data
-    //                       albumCache.set(albumId, albumData) // 👉 Save to cache
-    //                   }
-
-    //                   // 👉 Extract track duration from cached albumData
-    //                   const widgets = albumData.methods?.[0]?.template?.widgets
-    //                   if (widgets?.[0]) {
-    //                       const albumTracks = widgets[0].items
-
-    //                       const albumTrack = albumTracks.find((track: any) => {
-    //                           const deeplink = track.primaryTextLink?.deeplink
-    //                           const idFromLink = deeplink?.split('/tracks/')[1]?.split('/')[0]
-    //                           return idFromLink === trackId
-    //                       })
-
-    //                       const durationString = albumTrack.secondaryText3 || ''
-    //                       duration = durationToSeconds(durationString)
-    //                   }
-    //               } catch (err) {
-    //                   console.log(`Could not fetch album details for song ${trackId}`, err)
-    //               }
-
-    //               return {
-    //                   id: trackId,
-    //                   title: cleanSongTitle(item.primaryText?.text) || null,
-    //                   url: `https://music.amazon.com/tracks/${encodeURIComponent(trackId)}`,
-    //                   image: cleanImageUrl(item.image || null),
-    //                   duration,
-    //                   album: {
-    //                       id: albumId,
-    //                       name: item.contextMenu.options[0]?.onItemSelected?.[1]?.template?.headerText?.text || null,
-    //                       url: `https://music.amazon.com/albums/${encodeURIComponent(albumId)}`
-    //                   },
-    //                   artist: {
-    //                       id: artistId,
-    //                       name: item.secondaryText || null,
-    //                       url:
-    //                           item.contextMenu.options[1]?.onItemSelected?.[2]?.template?.templateData?.seoHead
-    //                               ?.link?.[0]?.href || null
-    //                   }
-    //               }
-    //           })
-    //       )
-    //     : []
-
-    // const albumCache: Record<string, any> = {}
-
-    // const topSongs: DetailsSong[] = topSongsWidget
-    //     ? await Promise.all(
-    //           topSongsWidget.items.map(async (item: any) => {
-    //               const [albumId, trackId] = item.iconButton.observer.storageKey.split(':')
-
-    //               // -------------------------
-    //               // Fetch album data ONLY ONCE
-    //               // -------------------------
-    //               if (!albumCache[albumId]) {
-    //                   try {
-    //                       const httpHeaders = buildAmazonHeaders(
-    //                           config,
-    //                           `https://music.amazon.com/albums/${encodeURIComponent(albumId)}`
-    //                       )
-
-    //                       const body = {
-    //                           id: albumId,
-    //                           userHash: JSON.stringify({ level: 'LIBRARY_MEMBER' }),
-    //                           headers: JSON.stringify(httpHeaders)
-    //                       }
-
-    //                       const songAlbumData = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
-    //                           headers: DEFAULT_HEADERS,
-    //                           timeout: 5000
-    //                       })
-
-    //                       albumCache[albumId] = songAlbumData.data.methods[0].template.widgets?.[0]?.items || []
-    //                   } catch (error) {
-    //                       console.log(`Could not fetch album details for album ${albumId}`)
-    //                       albumCache[albumId] = [] // fallback
-    //                   }
-    //               }
-
-    //               // -------------------------
-    //               // Find track duration from cached album
-    //               // -------------------------
-    //               let duration = 0
-    //               const albumTracks = albumCache[albumId]
-
-    //               const albumTrack = albumTracks.find((track: any) => {
-    //                   const deeplink = track.primaryTextLink?.deeplink
-    //                   if (deeplink) {
-    //                       const idFromDeep = deeplink.split('/tracks/')[1]?.split('/')[0]
-    //                       return idFromDeep === trackId
-    //                   }
-    //                   return false
-    //               })
-
-    //               if (albumTrack) {
-    //                   const durationString = albumTrack.secondaryText3 || ''
-    //                   duration = durationToSeconds(durationString)
-    //               }
-
-    //               // -------------------------
-    //               // Return final parsed song
-    //               // -------------------------
-    //               return {
-    //                   id: trackId,
-    //                   title: cleanSongTitle(item.primaryText?.text) || null,
-    //                   url: `https://music.amazon.com/tracks/${encodeURIComponent(trackId)}`,
-    //                   image: cleanImageUrl(item.image || null),
-    //                   duration,
-    //                   album: {
-    //                       id: albumId,
-    //                       name: item.contextMenu.options[0]?.onItemSelected[1]?.template.headerText.text || null,
-    //                       url: `https://music.amazon.com/albums/${encodeURIComponent(albumId)}`
-    //                   },
-    //                   artist: {
-    //                       id: artistId,
-    //                       name: item.secondaryText || null,
-    //                       url:
-    //                           item.contextMenu.options[1]?.onItemSelected[2]?.template.templateData.seoHead.link?.[0]
-    //                               ?.href || null
-    //                   }
-    //               }
-    //           })
-    //       )
-    //     : []
-
     // ---------------------------
     // Artist Top Tracks (Optimized)
     // ---------------------------
@@ -308,7 +81,7 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
 
             const songAlbumData = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
                 headers: DEFAULT_HEADERS,
-                timeout: 2000
+                timeout: 1500
             })
 
             return songAlbumData.data
@@ -319,30 +92,30 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
     }
 
     // ---------------------------
-    // Batch Fetch (size=5, delay=100ms)
+    // Parallel Fetch with Concurrency Control
     // ---------------------------
-    const BATCH_SIZE = 5
-    const DELAY_BETWEEN_BATCHES = 100
+    const CONCURRENT_REQUESTS = 8
 
-    for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
-        const batch = albumIds.slice(i, i + BATCH_SIZE)
+    // Fetch all albums in parallel with a max of 8 concurrent requests
+    const allResults = await Promise.allSettled(
+        albumIds.map(async (albumId) => {
+            const data = await fetchAlbumData(albumId)
+            return { albumId, data }
+        })
+    )
 
-        const batchPromises = batch.map((albumId) => fetchAlbumData(albumId))
-        const batchResults = await Promise.all(batchPromises)
-
-        batch.forEach((albumId, index) => {
-            if (batchResults[index]) {
-                const widgets = batchResults[index]?.methods?.[0]?.template?.widgets?.[0]
+    // Process results with rate-limiting awareness
+    allResults.forEach((result) => {
+        if (result.status === 'fulfilled') {
+            const { albumId, data } = result.value
+            if (data) {
+                const widgets = data?.methods?.[0]?.template?.widgets?.[0]
                 albumCache.set(albumId, widgets?.items || [])
             } else {
                 albumCache.set(albumId, []) // fallback
             }
-        })
-
-        if (i + BATCH_SIZE < albumIds.length) {
-            await new Promise((resolve) => setTimeout(resolve, DELAY_BETWEEN_BATCHES))
         }
-    }
+    })
 
     // ---------------------------
     // Build Final Songs
