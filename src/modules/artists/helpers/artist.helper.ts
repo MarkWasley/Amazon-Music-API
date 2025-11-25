@@ -50,9 +50,6 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
 
     const topSongsWidget = widgets.find((widget: any) => widget.header?.toLowerCase().includes('top songs'))
 
-    // ---------------------------
-    // Artist Top Tracks (Optimized)
-    // ---------------------------
     const albumCache = new Map<string, any>()
 
     // Collect unique album IDs
@@ -81,7 +78,7 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
 
             const songAlbumData = await axios.post(ENDPOINTS.ALBUM_INFO, body, {
                 headers: DEFAULT_HEADERS,
-                timeout: 1500
+                timeout: 2000
             })
 
             return songAlbumData.data
@@ -92,30 +89,30 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
     }
 
     // ---------------------------
-    // Parallel Fetch with Concurrency Control
+    // Batch Fetch (size=5, delay=100ms)
     // ---------------------------
-    const CONCURRENT_REQUESTS = 8
+    const BATCH_SIZE = 5
+    const DELAY_BETWEEN_BATCHES = 100
 
-    // Fetch all albums in parallel with a max of 8 concurrent requests
-    const allResults = await Promise.allSettled(
-        albumIds.map(async (albumId) => {
-            const data = await fetchAlbumData(albumId)
-            return { albumId, data }
-        })
-    )
+    for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
+        const batch = albumIds.slice(i, i + BATCH_SIZE)
 
-    // Process results with rate-limiting awareness
-    allResults.forEach((result) => {
-        if (result.status === 'fulfilled') {
-            const { albumId, data } = result.value
-            if (data) {
-                const widgets = data?.methods?.[0]?.template?.widgets?.[0]
+        const batchPromises = batch.map((albumId) => fetchAlbumData(albumId))
+        const batchResults = await Promise.all(batchPromises)
+
+        batch.forEach((albumId, index) => {
+            if (batchResults[index]) {
+                const widgets = batchResults[index]?.methods?.[0]?.template?.widgets?.[0]
                 albumCache.set(albumId, widgets?.items || [])
             } else {
                 albumCache.set(albumId, []) // fallback
             }
+        })
+
+        if (i + BATCH_SIZE < albumIds.length) {
+            await new Promise((resolve) => setTimeout(resolve, DELAY_BETWEEN_BATCHES))
         }
-    })
+    }
 
     // ---------------------------
     // Build Final Songs

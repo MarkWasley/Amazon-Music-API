@@ -266,9 +266,7 @@ export const createSearchSongsPagePayload = async (config: any, resp: any): Prom
     for (let i = 0; i < albumIds.length; i += BATCH_SIZE) {
         const batch = albumIds.slice(i, i + BATCH_SIZE)
 
-        const results = await Promise.all(
-            batch.map((albumId) => fetchAlbumData(albumId as string))
-        )
+        const results = await Promise.all(batch.map((albumId) => fetchAlbumData(albumId as string)))
 
         batch.forEach((albumId, index) => {
             if (results[index]) albumDataCache.set(albumId, results[index])
@@ -363,4 +361,3 @@ export const createSearchSongsPagePayload = async (config: any, resp: any): Prom
     songs.push(...validItems)
     return songs
 }
-
