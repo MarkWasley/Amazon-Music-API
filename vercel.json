@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [{ "source": "(.*)", "destination": "/api" }],
-  "regions": ["bom1"],
+  "regions": ["bom1", "iad1", "cdg1", "arn1", "dub1", "lhr1", "fra1", "sfo1", "pdx1", "cle1", "gru1", "hkg1", "hnd1", "icn1", "sin1", "syd1", "kix1", "cpt1", "dxb1"],
   "outputDirectory": "dist",
   "headers": [
     {
