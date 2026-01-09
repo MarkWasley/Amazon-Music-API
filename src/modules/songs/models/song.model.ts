@@ -6,6 +6,7 @@ export const SongModel = z.object({
     url: z.url(),
     image: z.url().nullable(),
     duration: z.number(),
+    isrc: z.string().nullable(),
     album: z.object({
         id: z.string(),
         name: z.string(),

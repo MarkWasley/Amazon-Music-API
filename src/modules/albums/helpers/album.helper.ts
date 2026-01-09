@@ -43,6 +43,7 @@ export const createAlbumPayload = (data: any, albumId: string): DetailsAlbum => 
                 url: trackId ? `https://music.amazon.com/tracks/${encodeURIComponent(trackId)}` : null,
                 image: album.headerImage || null,
                 duration: durationToSeconds(item.secondaryText3 || null),
+                isrc: null,
                 album: {
                     id: albumId,
                     name: album.headerText?.text || null,

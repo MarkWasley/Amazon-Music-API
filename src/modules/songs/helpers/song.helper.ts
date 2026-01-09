@@ -102,6 +102,25 @@ export const createSongPayload = (resp :any, trackId: string): DetailsSong => {
         artistUrl = `https://music.amazon.com${template.headerPrimaryTextLink.deeplink}`;
       }
 
+    // Extract ISRC from templateData SEO JSON-LD script
+    let isrc: string | null = null;
+    try {
+      const seoScripts = template.templateData?.seoHead?.script;
+      if (seoScripts && Array.isArray(seoScripts)) {
+        for (const script of seoScripts) {
+          if (script.innerHTML) {
+            const jsonLd = JSON.parse(script.innerHTML);
+            if (jsonLd.isrcCode) {
+              isrc = jsonLd.isrcCode;
+              break;
+            }
+          }
+        }
+      }
+    } catch {
+      // ISRC extraction failed, continue with null
+    }
+
     const info: DetailsSong = {
       id: trackId,
       title: template.headerText?.text || "Unknown Title",
@@ -110,6 +129,7 @@ export const createSongPayload = (resp :any, trackId: string): DetailsSong => {
       duration: trackItem
         ? durationToSeconds(trackItem.secondaryText3 || "")
         : 0,
+      isrc,
       album: {
         id: albumId,
         name: albumName,

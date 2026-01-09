@@ -45,6 +45,7 @@ export const createCommunityPlaylistPayload = (data: any, playlistId: string): D
                 url: trackId ? `https://music.amazon.com/tracks/${encodeURIComponent(trackId)}` : null,
                 image: cleanImageUrl(item.image || null),
                 duration: durationToSeconds(item.secondaryText3 || null),
+                isrc: null,
                 album: {
                     id: albumId,
                     name: item.secondaryText2,

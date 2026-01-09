@@ -27,21 +27,21 @@ export class SearchSongsUseCase implements IUseCase<SearchArgs, SearchSong[]> {
                 pageUrl: `https://music.amazon.com/search/${encodeURIComponent(query)}/songs`
             })
 
-            const { responseData: resp, config } = result;
+            const { responseData: resp, config } = result
 
             if (!resp) {
                 throw createError('No data in songs search response', 404, 'NoDataFound')
             }
 
-            let res: SearchSong[];
+            let res: SearchSong[]
 
             if (page >= 2 && page <= 25) {
-                res = await createSearchSongsPagePayload(config, resp, limit);
+                res = await createSearchSongsPagePayload(config, resp, limit)
             } else {
-                res = await createSearchSongsPayload(config, resp, limit);
+                res = await createSearchSongsPayload(config, resp, limit)
             }
 
-            return res;
+            return res
         } catch (error) {
             throw error
         }

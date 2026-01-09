@@ -152,6 +152,7 @@ curl 'http://localhost:3000/api/search/songs?query=Believer&page=1&limit=5'
             "url": null,
             "image": null,
             "duration": 1,
+            "isrc": "string | null",
             "album": {
                 "id": "string",
                 "name": "string",
@@ -322,6 +323,7 @@ curl 'http://localhost:3000/api/songs?url=https%3A%2F%2Fmusic.amazon.com%2Ftrack
         "url": "https://example.com",
         "image": null,
         "duration": 1,
+        "isrc": "string | null",
         "album": {
             "id": "string",
             "name": "string",
@@ -360,6 +362,7 @@ curl 'http://localhost:3000/api/songs/B079VDQRPX'
         "url": "https://example.com",
         "image": null,
         "duration": 1,
+        "isrc": "string | null",
         "album": {
             "id": "string",
             "name": "string",
@@ -416,6 +419,7 @@ curl 'http://localhost:3000/api/albums?url=https%3A%2F%2Fmusic.amazon.com%2Falbu
                 "url": "https://example.com",
                 "image": null,
                 "duration": 1,
+                "isrc": "string | null",
                 "album": {
                     "id": "string",
                     "name": "string",
@@ -481,6 +485,7 @@ curl 'http://localhost:3000/api/artists?url=https%3A%2F%2Fmusic.amazon.com%2Fart
                 "url": "https://example.com",
                 "image": null,
                 "duration": 1,
+                "isrc": "string | null",
                 "album": {
                     "id": "string",
                     "name": "string",
@@ -549,6 +554,7 @@ curl 'http://localhost:3000/api/playlists?url=https%3A%2F%2Fmusic.amazon.com%2Fp
                 "url": "https://example.com",
                 "image": null,
                 "duration": 1,
+                "isrc": "string | null",
                 "album": {
                     "id": "string",
                     "name": "string",
@@ -617,6 +623,7 @@ curl 'http://localhost:3000/api/community-playlists?url=https%3A%2F%2Fmusic.amaz
                 "url": "https://example.com",
                 "image": null,
                 "duration": 1,
+                "isrc": "string | null",
                 "album": {
                     "id": "string",
                     "name": "string",

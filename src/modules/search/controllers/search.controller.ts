@@ -17,9 +17,7 @@ export class SearchController implements Routes {
             defaultHook: (result, c) => {
                 if (!result.success) {
                     const firstError = result.error.issues[0]
-                    const errorMessage = firstError
-                        ? firstError.message
-                        : 'Validation failed'
+                    const errorMessage = firstError ? firstError.message : 'Validation failed'
 
                     const error = {
                         message: errorMessage,

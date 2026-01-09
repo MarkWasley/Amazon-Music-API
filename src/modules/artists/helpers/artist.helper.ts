@@ -144,6 +144,7 @@ export const createArtistPayload = async (data: any, config: any, artistId: stri
                 url: `https://music.amazon.com/tracks/${encodeURIComponent(trackId)}`,
                 image: cleanImageUrl(item.image),
                 duration,
+                isrc: null,
                 album: {
                     id: albumId,
                     name: item.contextMenu.options[0]?.onItemSelected[1]?.template.headerText.text || null,

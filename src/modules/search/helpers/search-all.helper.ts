@@ -260,6 +260,7 @@ export const createSearchAllPayload = async (config: any, resp: any): Promise<Se
                 image: cleanImageUrl(item.image || null),
                 url: songId ? `https://music.amazon.com/tracks/${songId}` : null,
                 duration,
+                isrc: null as string | null,
 
                 album: {
                     id: albumId || '',

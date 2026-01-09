@@ -172,6 +172,7 @@ export const createSearchSongsPayload = async (config: any, resp: any, limit?: n
                 url: songId ? `https://music.amazon.com/tracks/${songId}` : null,
                 image: cleanImageUrl(item.image || null),
                 duration: duration,
+                isrc: null as string | null,
                 artist: {
                     id: artistId,
                     name: artistName,
@@ -344,6 +345,7 @@ export const createSearchSongsPagePayload = async (config: any, resp: any, limit
                     url: trackId ? `https://music.amazon.com/tracks/${trackId}` : null,
                     image: cleanImageUrl(item.image || null),
                     duration,
+                    isrc: null as string | null,
                     artist: {
                         id: artistId,
                         name: artistName,

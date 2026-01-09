@@ -1,26 +1,26 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { OpenAPIHono } from '@hono/zod-openapi'
 
 export interface FetchOptions {
-  url: string;
-  body?: unknown;
-  pageUrl?: string;
+    url: string
+    body?: unknown
+    pageUrl?: string
 }
 
 export interface Routes {
-  controller: OpenAPIHono
-  initRoutes: () => void
+    controller: OpenAPIHono
+    initRoutes: () => void
 }
 
 export interface SearchArgs {
-  query: string
-  page?: number
-  limit?: number
+    query: string
+    page?: number
+    limit?: number
 }
 
 export interface Obj {
-  [key: string]: any
+    [key: string]: any
 }
 
 export interface IUseCase<T extends Obj | string = any, Tres = any> {
-  execute: (params: T) => Promise<Tres>
+    execute: (params: T) => Promise<Tres>
 }
