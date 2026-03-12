@@ -40,7 +40,9 @@ export class PlaylistController implements Routes {
                         url: z
                             .url()
                             .regex(
-                                new RegExp('^https://music\\.amazon\\.[a-z.]+/playlists/[A-Za-z0-9]+(?:/[^/?]+)?/?(?:\\?.*)?$'),
+                                new RegExp(
+                                    '^https://music\\.amazon\\.[a-z.]+/playlists/[A-Za-z0-9]+(?:/[^/?]+)?/?(?:\\?.*)?$'
+                                ),
                                 'Invalid Amazon Music Playlist URL format'
                             )
                             .openapi({

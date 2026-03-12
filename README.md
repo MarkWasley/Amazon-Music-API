@@ -711,6 +711,47 @@ This provides interactive documentation for all endpoints with request/response 
 
 Amazon Music may rate limit requests. Please be respectful with request frequency and implement appropriate delays in your applications.
 
+## Multi-Region Support
+
+Playlist endpoints support automatic multi-region resolution. Amazon Music playlists are territory-specific, so a playlist created in India may not be accessible through the US endpoint.
+
+### How It Works
+
+- **By URL:** The domain is extracted from the URL (e.g., `music.amazon.in`) and the matching regional endpoint is tried first. If it fails, all other regions are tried concurrently.
+- **By ID:** All supported regional domains are tried concurrently via `Promise.any`, and the first successful response is returned.
+
+Each region has its own `config.json` (csrf tokens, session credentials), which is fetched and cached per-domain automatically.
+
+### Supported Regions
+
+| Domain                | Region | Endpoint                     | Territory |
+| --------------------- | ------ | ---------------------------- | --------- |
+| `music.amazon.com`    | NA     | `na.web.skill.music.a2z.com` | US        |
+| `music.amazon.ca`     | NA     | `na.web.skill.music.a2z.com` | CA        |
+| `music.amazon.com.mx` | NA     | `na.web.skill.music.a2z.com` | MX        |
+| `music.amazon.com.br` | NA     | `na.web.skill.music.a2z.com` | BR        |
+| `music.amazon.co.uk`  | EU     | `eu.web.skill.music.a2z.com` | GB        |
+| `music.amazon.de`     | EU     | `eu.web.skill.music.a2z.com` | DE        |
+| `music.amazon.fr`     | EU     | `eu.web.skill.music.a2z.com` | FR        |
+| `music.amazon.it`     | EU     | `eu.web.skill.music.a2z.com` | IT        |
+| `music.amazon.es`     | EU     | `eu.web.skill.music.a2z.com` | ES        |
+| `music.amazon.in`     | EU     | `eu.web.skill.music.a2z.com` | IN        |
+| `music.amazon.co.jp`  | FE     | `fe.web.skill.music.a2z.com` | JP        |
+| `music.amazon.com.au` | FE     | `fe.web.skill.music.a2z.com` | AU        |
+
+### Examples
+
+```bash
+# Fetch a US playlist by URL — hits NA endpoint directly
+curl 'http://localhost:3000/api/playlists?url=https%3A%2F%2Fmusic.amazon.com%2Fplaylists%2FB07QHGBGC9'
+
+# Fetch an India playlist by URL — hits EU endpoint (music.amazon.in)
+curl 'http://localhost:3000/api/playlists?url=https%3A%2F%2Fmusic.amazon.in%2Fplaylists%2FB0FY37PDGM'
+
+# Fetch by ID only — tries all regions concurrently
+curl 'http://localhost:3000/api/playlists/B0FY37PDGM'
+```
+
 ## Limitations
 
 - **Metadata Only** - This API provides metadata only. It does not stream, download, or distribute music.
