@@ -713,14 +713,21 @@ Amazon Music may rate limit requests. Please be respectful with request frequenc
 
 ## Multi-Region Support
 
-Playlist endpoints support automatic multi-region resolution. Amazon Music playlists are territory-specific, so a playlist created in India may not be accessible through the US endpoint.
+Playlist and album endpoints support automatic multi-region resolution. Amazon Music content is territory-specific, so a playlist or album from Japan may not be accessible through the US endpoint.
 
 ### How It Works
 
-- **By URL:** The domain is extracted from the URL (e.g., `music.amazon.in`) and the matching regional endpoint is tried first. If it fails, all other regions are tried concurrently.
+- **By URL:** The domain is extracted from the URL (e.g., `music.amazon.co.jp`) and the matching regional endpoint is tried first. If it fails, all other regions are tried concurrently.
 - **By ID:** All supported regional domains are tried concurrently via `Promise.any`, and the first successful response is returned.
 
 Each region has its own `config.json` (csrf tokens, session credentials), which is fetched and cached per-domain automatically.
+
+### Supported Endpoints
+
+Multi-region resolution is enabled for:
+
+- **Playlists** — `/api/playlists/{id}` and `/api/playlists?url=`
+- **Albums** — `/api/albums/{id}` and `/api/albums?url=`
 
 ### Supported Regions
 
@@ -750,6 +757,12 @@ curl 'http://localhost:3000/api/playlists?url=https%3A%2F%2Fmusic.amazon.in%2Fpl
 
 # Fetch by ID only — tries all regions concurrently
 curl 'http://localhost:3000/api/playlists/B0FY37PDGM'
+
+# Fetch a Japanese album by URL — hits FE endpoint (music.amazon.co.jp)
+curl 'http://localhost:3000/api/albums?url=https%3A%2F%2Fmusic.amazon.co.jp%2Falbums%2FB06XJ23RLF'
+
+# Fetch album by ID — tries all regions concurrently
+curl 'http://localhost:3000/api/albums/B06XJ23RLF'
 ```
 
 ## Limitations
